@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myBookshelf">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>myBookshelf</title>
+    <title>BookShelfie</title>
     <!-- Bootstrap css and my own css -->
     <link rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
@@ -11,108 +12,135 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-   
-    <div class="container">
-        <nav class="navbar navbar-default" role="navigation">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Brand</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
+<div class="container full-page">
+       <nav class="navbar navbar-fixed-top navbar-bookselfie animate" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="animbrand">
+                        <a class="navbar-brand animate" href="#">BookShelfie</a>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-              </form>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="visible-xs">
+                            <form action="http://bookselfie.com/search" method="GET" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search for snippets">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </li>
+                        <li><a href="#" class="animate">All Books</a></li>
+                        <li><a class="animate" href="#register">My Books</a></li>
+                         <li><a href="#" class="animate" id="newBook"><span class="glyphicon glyphicon-plus-sign"></span> New Book</a></li>
+                         <li><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">New Book</a></li>
+                        <li class="hidden-xs"><a href="#toggle-search" class="animate"><span class="glyphicon glyphicon-search"></span></a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="bookselfie-search animate">
+                <div class="container">
+                    <form action="http://bookselfie.com/search" method="GET" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="Search for snippets and hit enter">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </nav>
+    
+    </div>
 
-            <div class="row">
-                <div class="col-sm-4 col-md-3 sidebar">
-            <div class="mini-submenu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+    <div class="container content">
+        <div class="container books">
+
+            <div class="row title">
+                <h2>All Books</h2>
             </div>
-            <div class="list-group">
-                <span href="#" class="list-group-item active">
-                    Submenu
-                    <span class="pull-right" id="slide-submenu">
-                        <i class="fa fa-times"></i>
-                    </span>
-                </span>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> Lorem ipsum
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-search"></i> Lorem ipsum
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-user"></i> Lorem ipsum
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Lorem ipsum
-                </a>
-            </div>        
-        </div>
+            <div class="row all-books">
+                <div class="col-sm-3" ng-repeat="footy in list.data | filter:list.search">
+                    <div class="well well-sm">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img src="#" class="img-rounded img-responsive well-image">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>{{book.title}}</h4>
+                                <p><strong>Description: </strong> {{book.home_field}} </p>
+                                <p><strong>Author: </strong>{{book.important_fact}}</p>
+                                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#footy-info" ng-click="list.changeActiveFooty(footy)">Add</button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
             </div>
+        </div>  
+
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" id="closeBtn" onclick="closeNav()">&times;</a>
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">Contact</a>
         </div>
 
-    <!-- third party js -->
+          <!-- Modal -->
+            <div id="add_project" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header ">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title">Add Book</h4>
+                        </div>
+                        <div class="modal-body">
+                                    <input type="text" placeholder="Project Title" name="name">
+                                    <input type="text" placeholder="Post of Post" name="mail">
+                                    <input type="text" placeholder="Author" name="passsword">
+                                    <textarea placeholder="Desicrption"></textarea>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="cancel" data-dismiss="modal">Close</button>
+                            <button type="button" class="add-project" data-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
+
+</div>
+       <!-- third party js -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <!-- Our application scripts -->
+    <script src="js/interaction.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
+
 </html>
-
-
