@@ -328,9 +328,14 @@ body {
   margin: 0 auto;
 }
 
-.btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:link{
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus, .btn-primary:visited, .btn-primary:link{
   background-color: #20564b;
   border: 1px solid #ffffff;
+  outline:0;
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger:active:focus, .btn-danger:visited, .btn-danger:link{
+  outline:0;
 }
 
 .btn-book{
