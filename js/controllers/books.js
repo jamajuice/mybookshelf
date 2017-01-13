@@ -1,6 +1,3 @@
-/*
- * IIFE to keep code clean and safe
- */
 (function(){
 	
 	angular
@@ -15,6 +12,7 @@
 	   		vm.search = "";
 	   		vm.showAllBooks = true;
 	   		vm.showMyBooks = false;
+	   		vm.toggleAllBooks = toggleAllBooks;
 	   		vm.toggleMyBooks = toggleMyBooks;
 	   		vm.update = update;
 	   		vm.reset = reset;
@@ -50,15 +48,18 @@
                 vm.bookForm.$setPristine();
 	        }
 
+	        function toggleAllBooks(){
+	        	if(!vm.showAllBooks){
+	        		vm.showAllBooks = true;
+	        		vm.showMyBooks = false; 
+	        		vm.search = "";
+	        	}
+	        }
+	         
 	        function toggleMyBooks(){
-	        	console
 	        	if(!vm.showMyBooks){
 	        		vm.showAllBooks = false;
 	        		vm.showMyBooks = true; 
-	        		vm.search = "";
-	        	}else{
-	        		vm.showAllBooks = true;
-	        		vm.showMyBooks = false; 
 	        		vm.search = "";
 	        	}
 	        }

@@ -32,9 +32,9 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-static-top navbar-right">
                         <li class="visible-xs">
-                            <form action="http://bookshelfie.com/search" method="GET" role="search">
+                            <form action="#" method="GET" role="search">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="q" ng-model="books.search" placeholder="Search for snippets">
                                     <span class="input-group-btn">
@@ -44,7 +44,7 @@
                                 </div>
                             </form>
                         </li>
-                        <li><a href="#" class="animate" ng-click="books.toggleMyBooks()">All Books</a></li>
+                        <li><a href="#" class="animate" ng-click="books.toggleAllBooks()">All Books</a></li>
                         <li><a class="animate" href="#" ng-click="books.toggleMyBooks()">My Books</a></li>
 
                         <li>
@@ -60,7 +60,7 @@
             </div>
             <div class="bookshelfie-search animate">
                 <div class="container">
-                    <form action="http://bookshelfie.com/search" method="GET" role="search">
+                    <form action="#" method="GET" role="search">
                         <div class="input-group">
                             <input type="text" class="form-control" name="q" placeholder="Search for books" ng-model="books.search">
                             <span class="input-group-btn">
@@ -76,7 +76,18 @@
 
     <div class="container content">
       <div class="container books">
-
+        <div class="alert alert-success" id="success-alert">
+             <button type="button" class="close" data-dismiss="alert">x</button>
+            New book has been added to My Books
+        </div>
+        <div class="alert alert-success" id="success-nb-alert">
+             <button type="button" class="close" data-dismiss="alert">x</button>
+            New book has been added to All Books
+        </div>
+        <div class="alert alert-danger" id="remove-alert">
+             <button type="button" class="close" data-dismiss="alert">x</button>
+            Book removed from My Books
+        </div>
         <div class="all-books" ng-show="books.showAllBooks">
             <div class="row title">
                 <h2>All Books</h2>
@@ -90,7 +101,7 @@
                                 <h5 class="book-title">{{ book.book_details[0].title }}</h5>
                                 <p class="book-desc"><strong>Description: </strong> {{book.book_details[0].description }} </p>
                                 <p><strong>Author: </strong>{{book.book_details[0].author }}</p>
-                                <button class=" btn btn-book btn-primary text-center" data-toggle="modal" data-target="#footy-info" ng-click="book.selected = true">Add</button>
+                                <button class="btn btn-book btn-primary text-center book-add" ng-click="book.selected = true">Add</button>
                             </div>
                         </div>
                     </div>  
@@ -110,22 +121,14 @@
                                 <h5 class="book-title">{{ book.book_details[0].title }}</h5>
                                 <p><strong>Author: </strong>{{book.book_details[0].author }}</p>
                                 <p class="book-desc"><strong>Description: </strong> {{book.book_details[0].description }} </p>
-                                <button class="btn btn-book btn-danger" data-toggle="modal" data-target="#footy-info" ng-click="book.selected = null">Remove</button>
+                                <button class="btn btn-book btn-danger book-remove" ng-click="book.selected = null">Remove</button>
                             </div>
                         </div>
                     </div>  
                 </div>
             </div>
         </div>
-        
 
-        <div id="mySidenav" class="sidenav">
-          <a href="javascript:void(0)" id="closeBtn" onclick="closeNav()">&times;</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
-        </div>
 
           <!-- Modal -->
             <div id="add_project" class="modal fade" role="dialog">

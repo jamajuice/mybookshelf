@@ -29,7 +29,7 @@
             }
 
             function getBooksDataFailed(error) {
-                 console.log('XHR Failed for getAvengers.');
+                 console.log('getBooksData() failed');
             }
           
       }
