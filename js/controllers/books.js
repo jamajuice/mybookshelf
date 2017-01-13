@@ -17,6 +17,7 @@
 	   		vm.showMyBooks = false;
 	   		vm.toggleMyBooks = toggleMyBooks;
 	   		vm.update = update;
+	   		vm.reset = reset;
 
 	   		activate();
 
@@ -35,18 +36,18 @@
 	        }
 
 	        function update(newBook){
-	        	console.log('Updating data');
 	        	var bookDetails = newBook;
 	        	var bookObj = {"book_details" : [{title: 4, author : "", description : "" }]};
-	        	console.log(bookDetails);
-	        	//console.log(bookDetails['title']);
 	        	bookObj.book_details[0].title =  bookDetails.title;
 	        	bookObj.book_details[0].author = bookDetails.author;
 	        	bookObj.book_details[0].description = bookDetails.description;
-	        	//bookObj.book_details.unshift(bookDetails);
 	        	bookObj.selected = null;
-	        	console.log(bookObj);
 	        	vm.data.unshift(bookObj);
+	        }
+
+	        function reset(){
+	        	vm.newBook={title:'',auhtor:'',description:''};
+                vm.bookForm.$setPristine();
 	        }
 
 	        function toggleMyBooks(){

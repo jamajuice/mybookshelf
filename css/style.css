@@ -349,8 +349,43 @@ body {
   overflow: hidden;
   max-height: 1.8em;
   line-height: 1.8em;
+  text-align:center;
+}
+
+.book-desc{
+  height: 3.68em;
 }
 
 .well-sm{
   height: 189px;
+}
+
+.btn-primary{
+  background-color: #0AAC8E ;
+  border: 1px solid #ffffff;
+  margin: 0 auto;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:link{
+  background-color: #20564b;
+  border: 1px solid #ffffff;
+}
+
+.btn-book{
+  display: table; 
+  margin: 0 auto;
+  width: 90%;
+}
+
+.add-book:disabled{
+  background-color:#a6c1bc;
+}
+
+input.ng-invalid.ng-dirty, textarea.ng-invalid.ng-dirty {
+  border: 1px solid #A9494D;
+}
+
+#input-desc{
+  height:200px;
+  word-break: break-word;
 }
