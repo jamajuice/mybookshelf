@@ -1,31 +1,39 @@
 (function(){
 	angular
 		.module("myBookshelf")
-		.factory("DataService", DataFactory);
+		.factory("DataService", DataService);
 
-	function DataFactory(){
-		var dataObj ={
-			allBookData: allBookData
-		};
+    	DataService.$inject = ['$http'];
 
-        function allBookData(){
-          $http.get("https://api.nytimes.com/svc/books/v3/lists.json",{
-             params: {
-                  "api-key": "14683607e3364210b547fd9c4eddf34c",
-                  "list": "e-book-fiction",
-                  "weeks-on-list": 1
-                }
-          }).then(function(response){ $scope.details = response.data; });
+        function DataService($http){
+            return {
+              getBooksData: getBooksData
+            };
 
-        }
+            function getBooksData() {
+              return $http.get("https://api.nytimes.com/svc/books/v3/lists.json",{
+                     params: {
+                          "api-key": "14683607e3364210b547fd9c4eddf34c",
+                          "list": "e-book-fiction"
+                        }
+                     })
+                    .then(getBooksDataComplete)
+                    .catch(getBooksDataFailed);
 
-        function add(){
+            function getBooksDataComplete(response) {
+                  var data = response.data.results;
+                  for (var book in data) {
+                      book.selected = null;
+                    }
+                  return data;
+            }
 
-        }
+            function getBooksDataFailed(error) {
+                 console.log('XHR Failed for getAvengers.');
+            }
+          
+      }
 
-
-		return dataObj;
-	}
-
+    }
   
 })();

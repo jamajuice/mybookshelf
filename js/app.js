@@ -1,4 +1,4 @@
-'use strict'
+/*'use strict'
 
 angular.module('myBookshelf', [])
   .controller('bookCtlr', function($scope, $http) {
@@ -22,6 +22,23 @@ angular.module('myBookshelf', [])
       this.setSelectionRange(0, this.value.length);
     }
 }); 
+*/
+
+  /*
+ * IIFE to keep code clean and safe
+ */
+(function(){
+
+    /*
+     * Declaration of main angular module for this appllication.
+     *
+     * It is named turtleFacts and has no dependencies (hence the 
+     * empty array as the second argument)
+     */
+    angular
+        .module("myBookshelf", []);
+
+})();
 
 
     /*$http({

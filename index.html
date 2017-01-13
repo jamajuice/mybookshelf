@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myBookshelf" ng-controller="bookCtlr">
+<html lang="en" ng-app="myBookshelf">
 
 <head>
     <meta charset="UTF-8">
@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-<div class="container full-page">
+<body ng-controller="bookCtrl as books" >
+    <div class="container full-page">
        <nav class="navbar navbar-fixed-top navbar-bookshelfie animate" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -44,8 +44,8 @@
                                 </div>
                             </form>
                         </li>
-                        <li><a href="#" class="animate">All Books</a></li>
-                        <li><a class="animate" href="#register">My Books</a></li>
+                        <li><a href="#" class="animate" ng-click="books.toggleMyBooks()">All Books</a></li>
+                        <li><a class="animate" href="#" ng-click="books.toggleMyBooks()">My Books</a></li>
 
                         <li><a href="#" class="add-project" data-toggle="modal" data-target="#add_project"><span class="glyphicon glyphicon-plus-sign"></span> New Book</a></li>
                         <li><a href="#" class="animate" id="newBook">New Book</a></li>
@@ -58,7 +58,7 @@
                 <div class="container">
                     <form action="http://bookshelfie.com/search" method="GET" role="search">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="q" placeholder="Search for books">
+                            <input type="text" class="form-control" name="q" placeholder="Search for books" ng-model="books.search">
                             <span class="input-group-btn">
                                 <button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
                             </span>
@@ -73,18 +73,40 @@
     <div class="container content">
       <div class="container books">
 
+        <div class="all-books" ng-show="books.showAllBooks">
             <div class="row title">
                 <h2>All Books</h2>
             </div>
-            <div class="row all-books">
-                <div class="col-sm-3" ng-repeat="book in details">
+            
+            <div class="row book-results">
+                <div class="col-sm-3" ng-repeat="book in books.data | filter: books.search" >
                     <div class="well well-sm">
                         <div class="row">
                             <div class="col-xs-12">
                                 <h5 class="book-title">{{ book.book_details[0].title }}</h5>
                                 <p class="book-desc"><strong>Description: </strong> {{book.book_details[0].description }} </p>
                                 <p><strong>Author: </strong>{{book.book_details[0].author }}</p>
-                                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#footy-info" ng-click="list.changeActiveFooty(footy)">Add</button>
+                                <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#footy-info" ng-click="book.selected = true">Add</button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="my-books" ng-show="books.showMyBooks">
+            <div class="row title">
+                <h2>My Books</h2>
+            </div>
+            <div class="row book-results">
+                <div class="col-sm-3" ng-repeat="book in books.data | filter: books.search" ng-if="book.selected">
+                    <div class="well well-sm">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h5 class="book-title">{{ book.book_details[0].title }}</h5>
+                                <p><strong>Author: </strong>{{book.book_details[0].author }}</p>
+                                <p class="book-desc"><strong>Description: </strong> {{book.book_details[0].description }} </p>
+                                <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#footy-info" ng-click="book.selected = null">Remove</button>
                             </div>
                         </div>
                     </div>  
@@ -107,25 +129,28 @@
 
                     <!-- Modal content-->
                     <div class="modal-content">
-                        <div class="modal-header ">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                            <h4 class="modal-title">Add Book</h4>
-                        </div>
-                        <div class="modal-body">
-                                    <input type="text" placeholder="Project Title" name="name">
-                                    <input type="text" placeholder="Post of Post" name="mail">
-                                    <input type="text" placeholder="Author" name="passsword">
-                                    <textarea placeholder="Desicrption"></textarea>
+                        <form validate>
+
+                            <div class="modal-header ">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <h4 class="modal-title">Add Book</h4>
                             </div>
-                        <div class="modal-footer">
-                            <button type="button" class="cancel" data-dismiss="modal">Close</button>
-                            <button type="button" class="add-book" data-dismiss="modal">Save</button>
-                        </div>
+                            <div class="modal-body">
+                                    <input type="text" placeholder="Book name"  ng-model="newBook.title"  name="name">
+                                    <input type="text" placeholder="Author"  ng-model="newBook.author"  name="passsword">
+                                    <textarea placeholder="Desicrption" ng-model="newBook.description"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="cancel" ng-click="reset()" data-dismiss="modal">Close</button>
+                                <button type="button" type="submit" class="add-book" ng-click="books.update(newBook)" data-dismiss="modal">Save</button>
+                            </div>
+                         </form>
                     </div>
 
                 </div>
             </div>
 
+        </div>
     </div>
  
        <!-- third party js -->
@@ -136,8 +161,7 @@
     <!-- Application scripts -->
     <script src="js/interaction.js"></script>
     <script src="js/app.js"></script>
-    <script type="text/javascript" src="js/controllers/list.js"></script>
-    <script type="text/javascript" src="js/controllers/quiz.js"></script>
+    <script type="text/javascript" src="js/controllers/books.js"></script>
     <script type="text/javascript" src="js/factories/dataservice.js"></script>
 
 </body>

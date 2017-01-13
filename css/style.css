@@ -350,3 +350,7 @@ body {
   max-height: 1.8em;
   line-height: 1.8em;
 }
+
+.well-sm{
+  height: 189px;
+}
